@@ -5,7 +5,7 @@
 - fetch and store all
 - all stats
 - yearly stats
-- ratings?
+- ratings
 
 ## todo (ranked acc. to priority)
 (x) fetch info from each film url
