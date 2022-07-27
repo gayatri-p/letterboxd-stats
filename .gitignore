@@ -4,3 +4,9 @@ export/profile.csv
 export/comments.csv
 export/reviews.csv
 export/watchlist.csv
+example_files/
+__pycache__
+example.html
+instr.txt
+main.log
+test.*

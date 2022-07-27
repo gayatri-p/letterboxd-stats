@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @font-face {
+            font-family: TiemposTextWeb-Semibold;
+            font-style: normal;
+            font-weight: 400;
+            src: url({{ url_for('static', filename='/fonts/TiemposText-Semibold.otf') }});
+        }
+
+        @font-face {
+            font-family: Graphik-Regular-Web;
+            font-style: normal;
+            font-weight: 400;
+            src: url({{ url_for('static', filename='/fonts/GraphikRegular.otf') }});
+        }
+    </style>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>A Life in Film</title>
+    {% block head %}{% endblock %}
+</head>
+<body class="year-in-review person-yir shortbackdropped -backdrop -crop logged-in hide-unwatched">
+    
+    <div id="content" class="site-body">	
+    <div class="content-wrap">
+    <article id="js-member-statistics" class="yir">
+
+    <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='highcharts.js') }}"></script>
+
+    {% block body %}{% endblock %}
+
+    </article>
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

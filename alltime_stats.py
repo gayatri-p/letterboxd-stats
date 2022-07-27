@@ -13,7 +13,7 @@ time = 0
 films = 0
 
 def get_rating(uri):
-    with open('ratings.csv', encoding='utf-8') as f:
+    with open('export/ratings.csv', encoding='utf-8') as f:
         r = csv.reader(f)
         next(r)
         for row in r:
@@ -22,7 +22,7 @@ def get_rating(uri):
 
     return None
 
-with open('data.csv', 'r', encoding='utf-8') as f:
+with open('export/data.csv', 'r', encoding='utf-8') as f:
     reader = csv.reader(f)
     i = 0
     for row in reader:
@@ -50,7 +50,7 @@ def most_watched(lst, count):
         r.append(f'{s[i][0]} ({len(s[i][1])})') 
     return r
 
-def w_avg(lst, min_films):
+def w_avg(lst, min_films=0):
     nl = list(filter(None, lst))
     return mean(nl) if len(nl) >= min_films else 0
 
