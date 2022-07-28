@@ -16932,7 +16932,7 @@ body.my-own-films .film-table tbody td.td-actions .overlay-actions {
 }
 
 .popmenu {
-    display: none;
+    display: block;
     padding-left: 0;
     position: absolute;
     width: 150px
@@ -16943,7 +16943,11 @@ body.my-own-films .film-table tbody td.td-actions .overlay-actions {
 }
 
 .popmenu.yir-popup-menu {
-    width: 100px
+    width: 100px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 }
 
 .popmenu>ul {
@@ -31505,7 +31509,8 @@ li:last-child .add-to-a-list {
 .yir-member-header.-all-time .yir-member-title {
     font-size: 7.38461538rem;
     margin-bottom: .08333333em;
-    padding-top: 120px
+    padding-top: 120px;
+    position: relative;
 }
 
 .mobile .yir-member-header.-all-time .yir-member-title {
@@ -31667,8 +31672,9 @@ li:last-child .add-to-a-list {
     font-weight: 400;
     line-height: 1.26315789;
     margin-bottom: 0;
-    margin-top: 0;
+    margin-top: 40px;
     text-align: center;
+    position:relative;
     text-shadow: 0 0 .25em rgba(20, 24, 28, .75)
 }
 
@@ -45919,7 +45925,7 @@ td.datepickerSpecial.datepickerSelected a {
 }
 
 .pl-section-popup-menu {
-    position: relative
+    position: relative;
 }
 
 .pl-section-popup-menu .popup-menu {

@@ -58,7 +58,7 @@ var filmsByYearChart = {
             pointWidth: 10
         }
     },
-    
+
 }
 
 var filmsByReleaseYear = jQuery.extend(true, {}, filmsByYearChart, {
@@ -105,19 +105,18 @@ var breakdownChart = {
     xAxis: {
         lineWidth: 0,
         labels: {
-            name: 'aaa',
             x: -30,
             align: 'left',
             reserveSpace: true,
-            formatter: function() {
-                return '<a style="color:#fff;font-size:15px" href="https://letterboxd.com/' + 
-                        USERNAME + '/films/genre/'+ this.name + '/">' + this.value + '</a>';
-            },
+            useHTML: true,
+            // formatter: function() {
+            //     return '<a style="color:#fff;font-size:15px" href="https://letterboxd.com/' + 
+            //             USERNAME + '/films/genre/'+ this.name + '/">' + this.value + '</a>';
+            // },
             // style: {
             //     color: 'white',
             //     fontSize: 15,
             // },
-            useHTML: true
         }
     },
     yAxis: {
@@ -144,12 +143,22 @@ var breakdownChart = {
     },
 }
 
+function breakdownChartLink(category, value) {
+    return '<a style="color:#fff;font-size:15px;text-transform:capitalize" href="https://letterboxd.com/' +
+        USERNAME + '/films/' + category + '/' + value.toLowerCase() + '/">' + value + '</a>'
+}
+
 var genreChart = jQuery.extend(true, {}, breakdownChart, {
     chart: {
         renderTo: 'films-by-genre'
     },
     xAxis: {
         categories: genre[0],
+        labels: {
+            formatter: function () {
+                return breakdownChartLink('genre', this.value)
+            },
+        },
     },
     series: [{
         name: 'Data2',
@@ -165,6 +174,11 @@ var countryChart = jQuery.extend(true, {}, breakdownChart, {
     },
     xAxis: {
         categories: country[0],
+        labels: {
+            formatter: function () {
+                return breakdownChartLink('country', this.value)
+            },
+        },
     },
     series: [{
         name: 'Data2',
@@ -180,6 +194,11 @@ var languageChart = jQuery.extend(true, {}, breakdownChart, {
     },
     xAxis: {
         categories: language[0],
+        labels: {
+            formatter: function () {
+                return breakdownChartLink('language', this.value)
+            },
+        },
     },
     series: [{
         name: 'Data2',

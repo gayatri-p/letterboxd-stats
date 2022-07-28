@@ -1,19 +1,18 @@
-from re import A
 from flask import Blueprint, render_template
 import csv
 from statistics import mean
 from random import randint
+import datetime
 
 years = {}
-acts = {} #'actor': [rat1, rat2, rat3]
-directors = {} #'director': [rat1, rat2, rat3]
+acts = {}
+directors = {}
 countries = {}
 genres = {}
 languages = {}
+rewatched_films = []
 time = 0
 films = 0
-
-# vals = [chr(i) for i in range(65, 75)]
 
 def get_rating(uri):
     with open('export/ratings.csv', encoding='utf-8') as f:
@@ -21,78 +20,82 @@ def get_rating(uri):
         next(r)
         for row in r:
             if uri == row[3].split('/')[-1]:
-                return float(row[4])
-
+                try:
+                    return float(row[4])
+                except:
+                    return None
     return None
 
 with open('export/data.csv', 'r', encoding='utf-8') as f:
     reader = csv.reader(f)
-    i = 0
+    next(reader)
     for row in reader:
         year, name, dir_, runtime, cast = int(row[1]), row[2], row[3], row[4], eval(row[5])
         rating = get_rating(row[0])
 
-        country = genre = language = chr(randint(65, 75))
-
-        if len(row) > 10:
-            cast = eval(row[:10])
+        country, language, genre= eval(row[7]), eval(row[8]), eval(row[9])
+        for c in country:
+            countries[c] = countries.get(c, 0) + 1
+        for g in genre:
+            genres[g] = genres.get(g, 0) + 1
+        for l in language:
+            languages[l] = languages.get(l, 0) + 1
 
         for c in cast:
-            if c.startswith("Show All"):
-                continue
             acts.setdefault(c, []).append(rating)
         
         directors.setdefault(dir_, []).append(rating)
         years.setdefault(year, []).append(rating)
-        time += int(runtime)
         films += 1
 
-        countries[country] = countries[country] + 1 if country in countries else 1
-        genres[genre] = genres[genre] + 1 if genre in genres else 1
-        languages[language] = languages[language] + 1 if language in languages else 1
+        watches = eval(row[10])
+        times_watched = 1 if len(watches) == 0 else len(watches)
+        if times_watched > 1:
+            poster = row[6]
+            rewatched_films.append({'name': name, 'times': times_watched, 'poster': poster})
 
-tot_time = f'{time//(60)}'
-tot_films = str(films)
-tot_directors = f'{len(directors)}'
+        time += int(runtime)*times_watched
 
-def most_watched(lst, count):
-    s = sorted(lst.items(), key=lambda x: len(x[1]))
-    s.reverse()
-    r = []
-    for i, a in enumerate(s):
+def most_watched(dictionary, count):
+    integer_value = True if isinstance(list(dictionary.values())[0], int) else False
+
+    if integer_value:
+        top = sorted(dictionary.items(), key=lambda x: x[1])
+    else:
+        top = sorted(dictionary.items(), key=lambda x: len(x[1]))
+
+    top.reverse()
+    top_count = {}
+
+    for i, item in enumerate(top):
         if i >= count:
             break
-        r.append((a[0], len(a[1])))
-    return r
+        top_count[item[0]] = item[1] if integer_value else len(item[1])
 
-def w_avg(lst, min_films=0):
+    return top_count
+
+def average(lst, min_films=0):
     nl = list(filter(None, lst))
-    return mean(nl) if len(nl) >= min_films else 0
+    if nl:
+        return mean(nl) if len(nl) >= min_films else 0
+    return 0
 
-def highest_rated(lst, count, min_films):
+def highest_rated(dictionary, count, min_films):
     ''' atleast <min_films> films watched AND rated '''
 
-    s = sorted(lst.items(), 
-        key=lambda x: w_avg(x[1], min_films))
-    s.reverse()
+    top = sorted(dictionary.items(), 
+        key=lambda x: average(x[1], min_films))
+    top.reverse()
 
-    r = []
+    top_count = []
 
     try:
         for i in range(count):
-            avg = w_avg(s[i][1], min_films)
-            r.append((s[i][0], round(avg, 2)))
+            avg = average(top[i][1], min_films)
+            top_count.append((top[i][0], round(avg, 2)))
     except:
-        return r
-    # print(r)
-    return r
-
-
-actors_most_watched = most_watched(acts, 10)
-directors_most_watched = most_watched(directors, 10)
-actors_by_rating = highest_rated(acts, 10, 4)
-directors_by_rating = highest_rated(directors, 10, 2)
-
+        return top_count
+    return top_count
 
 def films_by_year_chart(chartID = 'films-by-release-year-chart', chart_type = 'column'):
     miny, maxy = min(years), max(years)
@@ -101,7 +104,7 @@ def films_by_year_chart(chartID = 'films-by-release-year-chart', chart_type = 'c
     ratings = []
     for year in bins:
         if year in years:
-            ratings.append(w_avg(years[year]))
+            ratings.append(average(years[year]))
             count.append(len(years[year]))
         else:
             count.append(0)
@@ -122,23 +125,42 @@ def films_by_year_chart(chartID = 'films-by-release-year-chart', chart_type = 'c
     return chart_info
 
 def breakdown_charts():
-
+    top_genres = most_watched(genres, 10)
+    top_countries = most_watched(countries, 10)
+    top_languages = most_watched(languages, 10)
     return {
-        'genre_keys': list(genres.keys()),
-        'genre_vals': list(genres.values()),
-        'country_keys': list(countries.keys()),
-        'country_vals': list(countries.values()),
-        'language_keys': list(languages.keys()),
-        'language_vals': list(languages.values()),
+        'genre_keys': list(top_genres.keys()),
+        'genre_vals': list(top_genres.values()),
+        'country_keys': list(top_countries.keys()),
+        'country_vals': list(top_countries.values()),
+        'language_keys': list(top_languages.keys()),
+        'language_vals': list(top_languages.values()),
     }
 
+
+lifetime_stats = {
+    'tot_time' : f'{time//60}',
+    'tot_films' : str(films),
+    'tot_directors' : f'{len(directors)}',
+    'tot_countries' : f'{len(countries)}'
+}
+
+actors_most_watched = most_watched(acts, 10)
+directors_most_watched = most_watched(directors, 10)
+actors_by_rating = highest_rated(acts, 10, 4)
+directors_by_rating = highest_rated(directors, 10, 2)
+films_most_watched = sorted(rewatched_films, key=lambda x: x['times'], reverse=True)
+
+# print(most_watched(acts, 10))
 alltime = Blueprint('alltime', __name__, template_folder='templates')
 
 @alltime.route('alltime')
 @alltime.route('/')
 def index():
-    return render_template('index.html', tot_time=tot_time, tot_films=tot_films, tot_directors=tot_directors,
+    return render_template('index.html', lifetime_stats=lifetime_stats,
                             actors_most_watched=actors_most_watched, actors_by_rating=actors_by_rating,
                             directors_most_watched=directors_most_watched, directors_by_rating=directors_by_rating,
+                            films_most_watched=films_most_watched,
                             films_by_year_chart=films_by_year_chart(),
-                            breakdown_charts=breakdown_charts())
+                            breakdown_charts=breakdown_charts(),
+                            countries=countries)
