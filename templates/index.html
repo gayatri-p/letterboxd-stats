@@ -157,7 +157,7 @@
                 <div class="poster film-poster">
                     <div>
                         <img src="{{ film['poster'] }}" width="110" height="165" alt="{{ film['name'] }}" class="image">
-                        <a href="https://letterboxd.com/binary_bark/film/{{ uri }}/activity/" class="frame has-menu"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ uri }}/activity/" class="frame has-menu"></a>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
 
     </div>
     <div class="yir-truncation-button"> 
-        <a class="yir-button -large" target="_blank" href="https://letterboxd.com/binary_bark/films/diary/by/diary-count/">See all</a>
+        <a class="yir-button -large" target="_blank" href="https://letterboxd.com/{{USERNAME}}/films/diary/by/diary-count/">See all</a>
     </div>
 </section>
 
@@ -193,12 +193,12 @@
                 {% set url = actor.replace(' ', '-').replace('.', '').lower() %}
 
                 <li>
-                    <a href="https://letterboxd.com/binary_bark/films/with/actor/{{ url }}/" class="avatar -irregular -a150 image-loaded">
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/with/actor/{{ url }}/" class="avatar -irregular -a150 image-loaded">
                         <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
                     </a>
                     <div class="yir-person-list-data">
-                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/with/actor/{{ url }}/">{{ actor }}</a></p>
-                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/with/actor/{{ url }}/">{{ n_films }}&nbsp;films</a></p>
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/with/actor/{{ url }}/">{{ actor }}</a></p>
+                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/with/actor/{{ url }}/">{{ n_films }}&nbsp;films</a></p>
                     </div>
                 </li>
             
@@ -217,11 +217,11 @@
             {% set url = actor[0].replace(' ', '-').replace('.', '').lower() %}
                 <li>
                     
-                    <a href="https://letterboxd.com/binary_bark/films/ratings/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
                         <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
                     </a>
                     <div class="yir-person-list-data">
-                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/ratings/with/actor/{{url}}/by/entry-rating/">{{actor[0]}}</a></p>
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/actor/{{url}}/by/entry-rating/">{{actor[0]}}</a></p>
                         <p class="yir-label –center -detail">★ {{actor[1]}}</p>
                     </div>
                 </li>
@@ -259,10 +259,10 @@
 
                     <li>
                         
-                        <a href="https://letterboxd.com/binary_bark/films/with/director/{{url}}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
                         <div class="yir-person-list-data">
-                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/with/director/{{url}}/">{{director}}</a></p>
-                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/with/director/{{url}}/">{{n_films}}&nbsp;films</a></p>
+                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{director}}</a></p>
+                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{n_films}}&nbsp;films</a></p>
                         </div>
                     </li>
 
@@ -283,9 +283,9 @@
                         
                         <li>
                             
-                            <a href="https://letterboxd.com/binary_bark/films/ratings/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                            <a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
                             <div class="yir-person-list-data">
-                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/binary_bark/films/ratings/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
+                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
                                 <p class="yir-label –center -detail">★ {{director[1]}}</p>
                             </div>
                         </li>

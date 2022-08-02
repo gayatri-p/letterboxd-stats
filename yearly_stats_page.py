@@ -3,6 +3,8 @@ import csv
 import datetime
 import tools
 
+USERNAME = tools.get_username()
+
 def get_film_info(name, release_year, year):
     film_info = {}
 
@@ -195,7 +197,7 @@ def index(year):
             films_by_week, films_by_weekday = get_weekly_data(yearly_data)
             print(films_by_weekday)
 
-            return render_template('yearly.html', YEAR=year, details=details,
+            return render_template('yearly.html', USERNAME=USERNAME, YEAR=year, details=details,
                         highest_rated_of_year=highest_rated_of_year,
                         highest_rated_older=highest_rated_older, milestones=milestones,
                         most_watched=most_watched, actors_most_watched=actors_most_watched,

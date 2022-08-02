@@ -84,7 +84,7 @@
                 <div class="react-component poster film-poster linked-film-poster">
                     <div>
                         <img src="{{film['poster']}}" width="110" height="165" alt="{{ film['name'] }}" class="image">
-                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/" class="frame has-menu"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/" class="frame has-menu"></a>
                     </div>
                 </div>
                 <p class="poster-viewingdata"><span class="rating rated-10">★{{ film['rating']}} </span></p>
@@ -107,7 +107,7 @@
                 <div class="react-component poster film-poster linked-film-poster">
                     <div>
                         <img src="{{ film['poster'] }}" width="110" height="165" alt="{{ film['name'] }}" class="image">
-                        <a href="https://letterboxd.com/binary_bark/film/{{url}}/" class="frame has-menu"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{url}}/" class="frame has-menu"></a>
                     </div>
                 </div>
                 <p class="poster-viewingdata"><span class="rating rated-10">★ {{ film['rating']}}</span></p>
@@ -200,7 +200,7 @@
                 <div class="poster film-poster linked-film-poster">
                     <div>
                         <img src="{{first['poster']}}" width="110" height="165" alt="{{ first['name'] }}" class="image">
-                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/activity/" class="frame"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
                             <div class="poster film-poster linked-film-poster">
                                 <div>
                                     <img src="{{ film['poster'] }}" width="110" height="165" alt="{{ film['name'] }}" class="image">
-                                    <a href="https://letterboxd.com/binary_bark/film/{{ url}}/activity/" class="frame"></a>
+                                    <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url}}/activity/" class="frame"></a>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                 <div class="poster film-poster linked-film-poster">
                     <div>
                         <img src="{{ last['poster'] }}" width="110" height="165" alt="{{ last['name'] }}" class="image">
-                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/activity/" class="frame"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
                     </div>
                 </div>
             </div>
@@ -350,12 +350,12 @@
                 {% set url = actor.replace(' ', '-').replace('.', '').lower() %}
 
                 <li>
-                    <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/" class="avatar -irregular -a150 image-loaded">
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{ url }}/" class="avatar -irregular -a150 image-loaded">
                         <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
                     </a>
                     <div class="yir-person-list-data">
-                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ actor }}</a></p>
-                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ n_films }}&nbsp;films</a></p>
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ actor }}</a></p>
+                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ n_films }}&nbsp;films</a></p>
                     </div>
                 </li>
             
@@ -374,11 +374,11 @@
             {% set url = actor[0].replace(' ', '-').replace('.', '').lower() %}
                 <li>
                     
-                    <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
                         <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
                     </a>
                     <div class="yir-person-list-data">
-                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/">{{actor[0]}}</a></p>
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/">{{actor[0]}}</a></p>
                         <p class="yir-label –center -detail">★ {{actor[1]}}</p>
                     </div>
                 </li>
@@ -416,10 +416,10 @@
 
                     <li>
                         
-                        <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                        <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
                         <div class="yir-person-list-data">
-                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}//">{{director}}</a></p>
-                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}/">{{n_films}}&nbsp;films</a></p>
+                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}//">{{director}}</a></p>
+                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/">{{n_films}}&nbsp;films</a></p>
                         </div>
                     </li>
 
@@ -440,9 +440,9 @@
                         
                         <li>
                             
-                            <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                            <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
                             <div class="yir-person-list-data">
-                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
+                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
                                 <p class="yir-label –center -detail">★ {{director[1]}}</p>
                             </div>
                         </li>

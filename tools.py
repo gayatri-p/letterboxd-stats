@@ -1,9 +1,12 @@
-
-
-
-
 from statistics import mean
 import csv
+
+def get_username():
+    with open('export/profile.csv', encoding='utf-8') as f:
+        r = csv.reader(f)
+        next(r)
+        for row in r:
+            return row[1]
 
 def get_rating(uri):
     with open('export/ratings.csv', encoding='utf-8') as f:

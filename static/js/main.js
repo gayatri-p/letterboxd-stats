@@ -1,5 +1,3 @@
-var USERNAME = 'binary_bark'
-
 // highcharts global settings
 Highcharts.setOptions({
     chart: {

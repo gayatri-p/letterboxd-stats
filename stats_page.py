@@ -6,6 +6,8 @@ import datetime
 
 import tools
 
+USERNAME = tools.get_username()
+
 years = {}
 acts = {}
 directors = {}
@@ -89,7 +91,7 @@ alltime = Blueprint('alltime', __name__, template_folder='templates')
 @alltime.route('alltime')
 @alltime.route('/')
 def index():
-    return render_template('index.html', lifetime_stats=lifetime_stats,
+    return render_template('index.html', USERNAME=USERNAME, lifetime_stats=lifetime_stats,
                             actors_most_watched=actors_most_watched, actors_by_rating=actors_by_rating,
                             directors_most_watched=directors_most_watched, directors_by_rating=directors_by_rating,
                             films_most_watched=films_most_watched,
