@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import csv
 from statistics import mean
 from tabulate import tabulate
-from main import root
 import os
 
 years = {}

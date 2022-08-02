@@ -9,6 +9,6 @@ __pycache__
 example.html
 instr.txt
 main.log
-test.*
+test*
 2021*
 bin/

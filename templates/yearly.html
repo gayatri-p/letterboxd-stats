@@ -4,21 +4,25 @@
 
 {% block body %}
 
+<script>
+    var YEAR = {{YEAR|safe}}
+</script>
+
 <header class="yir-member-header -all-time">
     <div class="constraint">
         
-        <h1 class="yir-member-title">{{YEAR}}</h1>    
+        <h1 class="yir-member-title" style="font-size:160px;padding:50px 0 20px 0">{{ YEAR }}</h1>    
 
         <h3 class="yir-member-subtitle">
-            all-time&nbsp;stats
-            <div id="yir-menu" class="popmenu popup-menu yir-popup-menu">
+            <span id="open-yir-menu">year in review</span>
+            <div id="yir-menu" class="popmenu popup-menu yir-popup-menu -hide">
                 <ul>
                     <li class="popup-menu-text"><a href="/" class="styled-number">All time</a></li>
                     {% for year in [2022, 2021] %}
                     
                     <li class="popup-menu-text">
                         <a href="/{{year}}" class="styled-number">
-                            {{year}}
+                            {{ year }}
                         </a>   
                     </li>
                     {% endfor %}
@@ -28,12 +32,434 @@
 
         <svg class="pattern -right" role="presentation" width="320" height="390" viewBox="0 0 320 390" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(318 63)"><rect fill="#00E054" y="67" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="58" rx="2"></rect><rect fill="#FF8000" y="172" width="4" height="62" rx="2"></rect></g><g transform="translate(298 88)"><rect fill="#00E054" y="59" width="4" height="70" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="162" width="4" height="42" rx="2"></rect></g><g transform="translate(278 78)"><rect fill="#00E054" y="86" width="4" height="50" rx="2"></rect><rect fill="#40BCF4" width="4" height="70" rx="2"></rect><rect fill="#FF8000" y="174" width="4" height="60" rx="2"></rect></g><g transform="translate(258 94)"><rect fill="#00E054" y="70" width="4" height="99" rx="2"></rect><rect fill="#40BCF4" width="4" height="48" rx="2"></rect><rect fill="#FF8000" y="196" width="4" height="30" rx="2"></rect></g><g transform="translate(238 83)"><rect fill="#00E054" y="104" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="58" rx="2"></rect><rect fill="#FF8000" y="192" width="4" height="32" rx="2"></rect></g><g transform="translate(218 108)"><rect fill="#00E054" y="79" width="4" height="40" rx="2"></rect><rect fill="#40BCF4" width="4" height="48" rx="2"></rect><rect fill="#FF8000" y="152" width="4" height="62" rx="2"></rect><rect fill="#FF8000" y="222" width="4" height="4" rx="2"></rect></g><g transform="translate(198 78)"><rect fill="#00E054" y="112" width="4" height="60" rx="2"></rect><rect fill="#40BCF4" width="4" height="80" rx="2"></rect><rect fill="#FF8000" y="184" width="4" height="30" rx="2"></rect><rect fill="#FF8000" y="222" width="4" height="10" rx="2"></rect></g><g transform="translate(178 64)"><rect fill="#00E054" y="100" width="4" height="119" rx="2"></rect><rect fill="#40BCF4" width="4" height="68" rx="2"></rect><rect fill="#FF8000" y="226" width="4" height="10" rx="2"></rect></g><g transform="translate(158 91)"><rect fill="#00E054" y="88" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="184" width="4" height="32" rx="2"></rect></g><g opacity=".8" transform="translate(138 100)"><rect fill="#00E054" y="63" width="4" height="50" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="138" width="4" height="82" rx="2"></rect></g><g transform="translate(118 100)"><rect fill="#00E054" y="66" width="4" height="50" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="172" width="4" height="32" rx="2"></rect></g><g transform="translate(98 110)"><rect fill="#00E054" y="66" width="4" height="30" rx="2"></rect><rect fill="#40BCF4" width="4" height="38" rx="2"></rect><rect fill="#FF8000" y="131" width="4" height="42" rx="2"></rect><rect fill="#FF8000" y="182" width="4" height="12" rx="2"></rect></g><g transform="translate(78 107)"><rect fill="#00E054" y="46" width="4" height="60" rx="2"></rect><rect fill="#40BCF4" width="4" height="10" rx="2"></rect><rect fill="#FF8000" y="149" width="4" height="32" rx="2"></rect></g><g transform="translate(58 76)"><rect fill="#00E054" y="63" width="4" height="60" rx="2"></rect><rect fill="#40BCF4" y="18" width="4" height="28" rx="2"></rect><rect fill="#40BCF4" width="4" height="10" rx="2"></rect><rect fill="#FF8000" y="185" width="4" height="36" rx="2"></rect></g><g transform="translate(38 39)"><rect fill="#00E054" y="83" width="4" height="74" rx="2"></rect><rect fill="#40BCF4" width="4" height="77" rx="2"></rect><rect fill="#FF8000" y="214" width="4" height="22" rx="2"></rect></g><g transform="translate(18 81)"><rect fill="#00E054" y="56" width="4" height="70" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="172" width="4" height="42" rx="2"></rect></g><g transform="translate(-2 101)"><rect fill="#00E054" y="36" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="10" rx="2"></rect><rect fill="#FF8000" y="124" width="4" height="72" rx="2"></rect></g></g></svg>
         <svg class="pattern -left" role="presentation" width="320" height="390" viewBox="0 0 320 390" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(318 70)"><rect fill="#00E054" y="86" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="77" rx="2"></rect><rect fill="#FF8000" y="202" width="4" height="32" rx="2"></rect><rect fill="#FF8000" y="238" width="4" height="4" rx="2"></rect></g><g transform="translate(298 121)"><rect fill="#00E054" y="55" width="4" height="90" rx="2"></rect><rect fill="#40BCF4" width="4" height="48" rx="2"></rect><rect fill="#FF8000" y="169" width="4" height="22" rx="2"></rect></g><g transform="translate(278 111)"><rect fill="#00E054" y="66" width="4" height="70" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="152" width="4" height="52" rx="2"></rect></g><g transform="translate(258 84)"><rect fill="#00E054" y="78" width="4" height="90" rx="2"></rect><rect fill="#FF8000" y="201" width="4" height="52" rx="2"></rect><rect fill="#40BCF4" width="4" height="60" rx="2"></rect></g><g transform="translate(238 80)"><rect fill="#00E054" y="96" width="4" height="90" rx="2"></rect><rect fill="#00E054" y="68" width="4" height="20" rx="2"></rect><rect fill="#40BCF4" width="4" height="47" rx="2"></rect><rect fill="#FF8000" y="212" width="4" height="32" rx="2"></rect></g><g transform="translate(218 96)"><rect fill="#00E054" y="48" width="4" height="70" rx="2"></rect><rect fill="#40BCF4" y="12" width="4" height="18" rx="2"></rect><rect fill="#40BCF4" width="4" height="4" rx="2"></rect><rect fill="#FF8000" y="144" width="4" height="22" rx="2"></rect></g><g transform="translate(198 111)"><rect fill="#00E054" y="46" width="4" height="60" rx="2"></rect><rect fill="#00E054" y="114" width="4" height="4" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="142" width="4" height="42" rx="2"></rect></g><g transform="translate(178 40)"><rect fill="#00E054" y="102" width="4" height="100" rx="2"></rect><rect fill="#FF8000" y="210" width="4" height="12" rx="2"></rect><rect fill="#40BCF4" width="4" height="70" rx="2"></rect></g><g transform="translate(158 86)"><rect fill="#00E054" y="36" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="132" width="4" height="32" rx="2"></rect></g><g transform="translate(138 86)"><rect fill="#00E054" y="36" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="132" width="4" height="32" rx="2"></rect></g><g transform="translate(118 111)"><rect fill="#00E054" y="36" width="4" height="80" rx="2"></rect><rect fill="#40BCF4" width="4" height="28" rx="2"></rect><rect fill="#FF8000" y="132" width="4" height="32" rx="2"></rect></g><g transform="translate(98 82)"><rect fill="#00E054" y="102" width="4" height="100" rx="2"></rect><rect fill="#FF8000" y="210" width="4" height="12" rx="2"></rect><rect fill="#40BCF4" width="4" height="70" rx="2"></rect></g><g transform="translate(78 74)"><rect fill="#00E054" y="51" width="4" height="170" rx="2"></rect><rect fill="#40BCF4" width="4" height="4" rx="2"></rect><rect fill="#40BCF4" y="23" width="4" height="20" rx="2"></rect><rect fill="#FF8000" y="246" width="4" height="34" rx="2"></rect></g><g transform="translate(58 127)"><rect fill="#00E054" y="64" width="4" height="40" rx="2"></rect><rect fill="#FF8000" y="144" width="4" height="74" rx="2"></rect><rect fill="#40BCF4" width="4" height="20" rx="2"></rect></g><g transform="translate(38 77)"><rect fill="#00E054" y="104" width="4" height="90" rx="2"></rect><rect fill="#FF8000" y="204" width="4" height="64" rx="2"></rect><rect fill="#40BCF4" width="4" height="24" rx="2"></rect><rect fill="#40BCF4" y="32" width="4" height="50" rx="2"></rect></g><g transform="translate(18 117)"><rect fill="#00E054" y="84" width="4" height="70" rx="2"></rect><rect fill="#FF8000" y="184" width="4" height="44" rx="2"></rect><rect fill="#FF8000" y="232" width="4" height="4" rx="2"></rect><rect fill="#40BCF4" width="4" height="30" rx="2"></rect></g><g transform="translate(-2 127)"><rect fill="#00E054" y="42" width="4" height="76" rx="2"></rect><rect fill="#FF8000" y="194" width="4" height="44" rx="2"></rect><rect fill="#40BCF4" width="4" height="10" rx="2"></rect></g></g></svg>
-        
-    
+
+    </div>
+
+    <div class="yir-member-stats">
+        <h4 class="yir-member-statistic statistic">
+            <span class="value">{{ details['diary_entries'] }}</span>
+            <span class="definition">Diary Entries</span>
+        </h4>
+
+        <h4 class="yir-member-statistic statistic">
+            <span class="value">{{ details['hours'] }}</span>
+            <span class="definition">Hours</span>
+        </h4>
+
+        <h4 class="yir-member-statistic statistic">
+            <span class="value">{{ details['directors']|length }}</span>
+            <span class="definition">Directors</span>
+        </h4>
+
+        <h4 class="yir-member-statistic statistic">
+            <span class="value">{{ details['countries']|length }}</span>
+            <span class="definition">Countries</span>
+        </h4>
     </div>
 
 
 </header>
+
+
+<!-- HIGHEST RATED -->
+<section class="yir-block yir-highest-rated posters-rated js-yir-tabs">
+    <header>
+        <a name="films-highest-rated"></a>
+        <h3 class="yir-title-3">
+            Highest rated  films
+        </h3>
+            <nav>
+                <a class="js-yir-internal-nav-link -active" id="btn-highest-rated-films">2021</a>
+                <a class="js-yir-internal-nav-link" id="btn-highest-rated-films-older">Older</a>
+            </nav>
+    </header>
+
+    <section id="highest-rated-films" class="js-yir-tab-section -show">
+        <ul class="poster-list -p110 -grid">
+            
+        {% for film in highest_rated_of_year %}
+        {% set url = film['name'].replace(' ', '-').replace('.', '').lower() %}
+
+            <li class="poster-container">
+                <div class="react-component poster film-poster linked-film-poster">
+                    <div>
+                        <img src="{{film['poster']}}" width="110" height="165" alt="{{ film['name'] }}" class="image">
+                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/" class="frame has-menu"></a>
+                    </div>
+                </div>
+                <p class="poster-viewingdata"><span class="rating rated-10">★{{ film['rating']}} </span></p>
+            </li>
+
+        {% endfor %}
+        
+        </ul>
+
+
+    </section>
+
+    <section id="highest-rated-films-older" class="js-yir-tab-section -hide">
+        <ul class="poster-list -p110 -grid">
+
+        {% for film in highest_rated_older %}
+        {% set url = film['name'].replace(' ', '-').replace('.', '').lower() %}
+
+            <li class="poster-container">
+                <div class="react-component poster film-poster linked-film-poster">
+                    <div>
+                        <img src="{{ film['poster'] }}" width="110" height="165" alt="{{ film['name'] }}" class="image">
+                        <a href="https://letterboxd.com/binary_bark/film/{{url}}/" class="frame has-menu"></a>
+                    </div>
+                </div>
+                <p class="poster-viewingdata"><span class="rating rated-10">★ {{ film['rating']}}</span></p>
+            </li>
+
+        {% endfor %}
+
+        </ul>
+    
+    </section>       
+
+</section>
+
+<!-- FILMS BY WEEK -->
+<section class="yir-block yir-films-by-week -compact">
+    <header>
+        <a name="films-by-week"></a>
+        <h3 class="yir-title-3">Films by week</h3>
+    </header>
+
+    <script>
+
+        var filmsByWeek = {{ films_by_week|safe }}
+        var filmsByWeekDay = {{ films_by_weekday|safe }}
+
+    </script>
+
+    <div style="height: 160px;margin-bottom: 95px;margin-top:-30px">
+        <div class="chart js-viewings-per-week-of-year-chart">
+            <div class="target js-target" data-highcharts-chart="6">
+                <div class="highcharts-container" id="chart-films-by-week"></div>
+            </div>
+            <div class="xaxis js-xaxis" style="width: 901px;">
+                <span class="yir-label –left">Jan</span>
+                <span class="yir-label -right">Dec</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FILMS BY MONTH -->
+<section class="yir-block yir-time-data text">
+    <section class="yir-numbers">
+        <ul>
+            {% set d = details['diary_entries'] %}
+            <li>
+                <strong>{{ d }}</strong> 
+                <span class="yir-label –center -detail">Films watched</span>
+                <i class="ir s"></i>
+            </li>
+            <li>
+                <strong>{{ (d/12)|round(1) }}</strong> 
+                <span class="yir-label –center -detail">Average per month</span>
+                <i class="ir s"></i>
+            </li>
+            <li>
+                <strong>{{ (d/52)|round(1) }}</strong> 
+                <span class="yir-label –center -detail">Average per week</span>
+            </li>
+        </ul>
+    </section>
+
+    <div class="daychart yir-viewings-per-day-of-the-week">
+        <div class="chart js-viewings-per-day-of-the-week-chart" data-lb-yir-chart-options="{&quot;bxdDataKey&quot;: &quot;e24ab59d-ec1b-42eb-88d7-3003ecfe2c1c&quot;}">
+            <div class="target js-target" data-highcharts-chart="7">
+                <div class="highcharts-container" id="chart-films-by-weekday"></div>    
+            </div>
+    </div>
+</section>
+
+<!-- MILESTONES (FIRST, LAST, REWATCHES) -->
+<section class="yir-block yir-first-last posters-110 no-poster-show-titles -compact">
+    <header>
+        <a name="milestones"></a>
+        <h3 class="yir-title-3">Milestones</h3>
+    </header>
+    <div class="clear"></div>
+
+    
+    <div class="first-last-inner">
+
+        <div class="film-block -first">
+            
+            <h3 class="yir-label yir-title-label">First Film</h3>
+
+            {% set first = milestones[0] %}
+            {% set url = first['name'].replace(' ', '-').replace('.', '').lower() %}
+
+            <div class="poster-container">
+                <div class="poster film-poster linked-film-poster">
+                    <div>
+                        <img src="{{first['poster']}}" width="110" height="165" alt="{{ first['name'] }}" class="image">
+                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/activity/" class="frame"></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="yir-label -detail">Jan 1</p>
+
+        </div>
+        
+        <div class="most-watched">
+            <h3 class="yir-label yir-title-label">Most Watched</h3>
+              
+            <div class="film-block-container">
+                    
+                {% for film in most_watched %}
+                {% if film['watches']|length >= 2 %}
+                    {% set url = film['name'].replace(' ', '-').replace('.', '').lower() %}
+
+                    <div class="film-block">
+
+                        <div class="poster-container">
+                            <div class="poster film-poster linked-film-poster">
+                                <div>
+                                    <img src="{{ film['poster'] }}" width="110" height="165" alt="{{ film['name'] }}" class="image">
+                                    <a href="https://letterboxd.com/binary_bark/film/{{ url}}/activity/" class="frame"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="yir-label -detail">{{ film['watches']|length }} times</p>	
+
+                    </div>			
+                    
+                {% endif %}
+                {% endfor %}
+                    
+            </div>
+        </div>
+        
+
+        <div class="film-block -last">	
+            <h3 class="yir-label yir-title-label">Last Film</h3>
+
+            {% set last = milestones[1] %}
+            {% set url = last['name'].replace(' ', '-').replace('.', '').lower() %}
+
+            <div class="poster-container">
+                <div class="poster film-poster linked-film-poster">
+                    <div>
+                        <img src="{{ last['poster'] }}" width="110" height="165" alt="{{ last['name'] }}" class="image">
+                        <a href="https://letterboxd.com/binary_bark/film/{{ url }}/activity/" class="frame"></a>
+                    </div>
+                </div>
+            </div>
+            <p class="yir-label -detail">Dec 31</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+</section>
+
+<!-- GENRES, COUNTRIES, LANGUAGES -->
+<section class="yir-block yir-breakdown-charts">
+    <header>
+        <a name="genres"></a>
+        <h3 class="yir-title-3">Genres, countries &amp; languages</h3>
+    </header>
+    
+    <div class="all-breakdown-charts"> 
+        <script>
+
+            var genre = [{{breakdown_charts.genre_keys | safe}}, {{breakdown_charts.genre_vals|safe}}]
+            var country = [{{breakdown_charts.country_keys | safe}}, {{breakdown_charts.country_vals|safe}}]
+            var language = [{{breakdown_charts.language_keys | safe}}, {{breakdown_charts.language_vals}}]
+           
+
+        </script>
+
+
+        <section class="yir-genres">
+            <div id="films-by-genre" class="yir-film-breakdown-graph">
+                
+            </div>
+        </section>
+        
+        <section class="yir-countries">
+            <div id="films-by-country" class="yir-film-breakdown-graph">
+                
+            </div>
+        </section>
+        
+        <section class="yir-languages">
+            <div id="films-by-language" class="yir-film-breakdown-graph">
+                
+            </div>
+        </section>
+    </div> 
+    
+ 
+</section>
+
+<!-- PIE CHARTS -->
+<section class="yir-block yir-charts">
+    <header>
+        <a name="breakdown"></a>
+        <h3 class="yir-title-3">Breakdown</h3>
+    </header>
+    <section class="yir-pies yir-personal-pies">
+        <script>
+
+            var diary_entries = {{ details['diary_entries']|safe }}
+            var older_releases = {{ pie_chart_info['older_releases']|safe }}
+            var releases_this_year = diary_entries - older_releases
+            var rewatches = {{ pie_chart_info['rewatches']|safe }}
+            var new_watches = diary_entries - rewatches
+
+
+        </script>
+        <div class="pie-chart pie-release-dates">
+            <h3 class="yir-label"><span class="pie-key pie-key-val1">2021 Releases</span> <span class="pie-key pie-key-val2">Older</span></h3>
+            <div id="pie-release-dates" class="pie-highchart"></div>
+            </div>
+        <div class="pie-chart pie-rewatches">
+            <h3 class="yir-label"><span class="pie-key pie-key-val1">Watches</span> <span class="pie-key pie-key-val2">Re-watches</span></h3>
+            <div id="pie-rewatches" class="pie-highchart"></div>   
+        </div>   
+    </section>
+
+</section>
+
+<!-- FAV ACTORS -->
+<section class="yir-block yir-faves js-yir-tabs">
+    <header>
+        <a name="stars"></a>
+        <h3 class="yir-title-3">Stars</h3>
+        <nav>
+            <a class="navlink js-yir-internal-nav-link -active" id="btn-most-watched-actors">Most watched</a>		
+            <a class="js-yir-internal-nav-link" id="btn-highest-rated-actors">Highest Rated</a>
+        </nav>
+    </header>
+
+    
+    
+    <section id="actors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+        
+        <ul class="avatar-list">
+            
+            {% for actor, n_films in actors_most_watched.items() %}
+                {% set url = actor.replace(' ', '-').replace('.', '').lower() %}
+
+                <li>
+                    <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/" class="avatar -irregular -a150 image-loaded">
+                        <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
+                    </a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ actor }}</a></p>
+                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{ url }}/">{{ n_films }}&nbsp;films</a></p>
+                    </div>
+                </li>
+            
+            {% endfor %}        
+                
+               
+        </ul>
+        
+    </section>
+    
+    <section id="actors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
+        
+        <ul class="avatar-list">
+                
+        {% for actor in actors_by_rating %}
+            {% set url = actor[0].replace(' ', '-').replace('.', '').lower() %}
+                <li>
+                    
+                    <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
+                        <img src="{{ url_for('static', filename='img/person2.png') }}" class="js-tmdb-person crop-square">
+                    </a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/">{{actor[0]}}</a></p>
+                        <p class="yir-label –center -detail">★ {{actor[1]}}</p>
+                    </div>
+                </li>
+        {% endfor %}   
+                
+            
+            </ul>
+        
+    </section>
+
+
+                
+    
+</section>
+
+<!-- FAV DIRECTORS -->
+<section class="yir-block yir-faves js-yir-tabs">
+    <header>
+        <a name="directors"></a>
+        <h3 class="yir-title-3">Directors</h3>
+        <nav>
+            
+            <a class="js-yir-internal-nav-link -active" id="btn-directors-most-watched">Most watched</a>
+                
+            <a class="js-yir-internal-nav-link" id="btn-directors-by-rating">Highest Rated</a>
+        </nav>
+    </header>
+    
+        <section id="directors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+            
+            <ul class="avatar-list">
+                
+                    {% for director, n_films in directors_most_watched.items() %}
+                    {% set url = director.replace(' ', '-').replace('.', '').lower() %}
+
+                    <li>
+                        
+                        <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                        <div class="yir-person-list-data">
+                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}//">{{director}}</a></p>
+                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{ url }}/">{{n_films}}&nbsp;films</a></p>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+                     
+            </ul>
+            
+        </section>
+        
+        
+            
+            <section id="directors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
+                
+                <ul class="avatar-list">
+                    
+                    {% for director in directors_by_rating %}
+                    {% set url = director[0].replace(' ', '-').replace('.', '').lower() %}
+                        
+                        <li>
+                            
+                            <a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                            <div class="yir-person-list-data">
+                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/binary_bark/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
+                                <p class="yir-label –center -detail">★ {{director[1]}}</p>
+                            </div>
+                        </li>
+                    
+                    {% endfor %}
+                       
+                </ul>
+            
+                
+            </section>
+            
+        
+    
+</section> 
+
+
+
 
 
 {% endblock body %}

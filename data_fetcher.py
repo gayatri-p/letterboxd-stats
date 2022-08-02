@@ -95,9 +95,9 @@ def get_film_data(film):
             rewatched = True
 
     # poster
-    if rewatched:
+    try:
         poster = str(soup.find('div', attrs={'id':'js-poster-col'}).find('img').attrs['src'])
-    else:
+    except:
         poster = ''
 
     details = [uri.split('/')[-1], year, name, director, time, cast, poster, countries, langs, genres, watches]
