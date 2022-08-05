@@ -85,7 +85,6 @@ def map_data(countries):
     data = {}
     
     for country, details in country_mapping.items():
-        print(country)
         data[details['code']] = {
             'count': countries.get(country, 0),
             'label': country,
