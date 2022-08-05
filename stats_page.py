@@ -71,22 +71,6 @@ def films_by_year_chart():
 
     return chart_info
 
-# def map_data(countries):
-#     with open('static/mapping.json') as f:
-#         country_mapping=json.load(f)
-    
-#     data = {}
-    
-#     for country, details in country_mapping.items():
-#         print(country)
-#         data[details['code']] = {
-#             'count': countries.get(country, 0),
-#             'label': country,
-#             'url': details['url']
-#         }
-
-#     return data
-
 breakdown_chart_info = tools.breakdown_charts(genres, countries, languages)
 
 lifetime_stats = {
