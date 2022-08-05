@@ -10118,7 +10118,7 @@ aside.sidebar .person-image+p.text-link {
 }
 
 .site-body {
-    background: #14181c url(../img/content-bg.0d9a0f0f.png) 0 -1px repeat-x;
+    background: #14181c url(/img/content-bg.png) 0 -1px repeat-x;
     padding: 30px 0
 }
 
@@ -45340,7 +45340,7 @@ td.datepickerSpecial.datepickerSelected a {
 }
 
 .pl-content {
-    background: #14181c url(../img/content-bg.0d9a0f0f.png) top repeat-x;
+    background: #14181c url(/img/content-bg.png) top repeat-x;
     padding: 100px 0
 }
 

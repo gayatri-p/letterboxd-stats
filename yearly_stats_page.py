@@ -17,7 +17,7 @@ def get_film_info(name, release_year, year):
 
                 uri = row[0]
                 watches = eval(row[10])
-                watches = list(filter(lambda x: x.year != str(year), watches))
+                watches = list(filter(lambda x: x.year == year, watches))
 
                 film_info = {
                     'uri': uri,
@@ -35,7 +35,6 @@ def get_film_info(name, release_year, year):
                 }
 
                 return film_info
-
 
 def get_yearly_data(year):
     yearly_data = []
@@ -84,20 +83,31 @@ def get_yearly_data(year):
 
             yearly_data.append(film_info)
 
+    if datetime.datetime.now().year == year:
+        now = datetime.datetime.now()
+        time_data = {
+            'per_month': round(diary_entries/now.month, 1),
+            'per_week': round(diary_entries/week_from_date(now), 1)
+        }
+    else:
+        time_data = {
+            'per_month': round(diary_entries/12, 1),
+            'per_week': round(diary_entries/52, 1)
+        }
+
     details = {
         'hours':time//60,
         'diary_entries': diary_entries,
+        'time_data': time_data,
         'rewatches': rewatches,
         'countries': countries,
         'genres': genres,
         'languages': languages,
         'directors': directors,
         'actors': actors,
-
     }
 
     return yearly_data, details
-
 
 def highest_rated_films(data, year, max_current_year=8, max_older=16):
 
@@ -125,24 +135,27 @@ def highest_rated_films(data, year, max_current_year=8, max_older=16):
 def get_milestones(data):
     first, *_ = sorted(data, key = lambda film: sorted(film['watches'])[0])
     *_, last = sorted(data, key = lambda film: sorted(film['watches'])[-1])
-
-    return first, last
+        
+    first_date = first['watches'][0].strftime("%b %d").replace('0', '')
+    last_date = last['watches'][-1].strftime("%b %d").replace('0', '')
+    
+    return (first, first_date), (last, last_date)
 
 def get_pie_info(data, year):
     older_releases = 0
     rewatches = 0
 
     for film in data:
-        watches = film['watches']
+        times_watched = len(film['watches'])
 
-        for date in watches:
-            # print(film['name'])
-            if date.year != year:
-                older_releases += 1
-            
-        if len(watches) > 1:
-            rewatches += len(watches) - 1
+        if times_watched > 1:
+            rewatches += times_watched - 1
 
+        # for times_watched:
+        if film['release_year'] != year:
+            older_releases += 1*times_watched
+
+    # print(older_releases)
     return {'older_releases': older_releases, 'rewatches':rewatches}
 
 def week_from_date(date_object):
@@ -164,7 +177,10 @@ def get_weekly_data(data):
         for day in watches:
             week = week_from_date(day)
             weeks[week] = weeks.get(week, 0) + 1
+            # print(day, week, film['name'])
             weekdays[day.weekday() + 1] += 1
+
+    # print(weeks)
 
     return weeks, weekdays
 
@@ -195,7 +211,8 @@ def index(year):
             pie_chart_info = get_pie_info(yearly_data, year)
 
             films_by_week, films_by_weekday = get_weekly_data(yearly_data)
-            print(films_by_weekday)
+
+            map_data=tools.map_data(details['countries'])
 
             return render_template('yearly.html', USERNAME=USERNAME, YEAR=year, details=details,
                         highest_rated_of_year=highest_rated_of_year,
@@ -204,7 +221,8 @@ def index(year):
                         actors_by_rating=actors_by_rating, directors_most_watched=directors_most_watched,
                         directors_by_rating=directors_by_rating,
                         breakdown_charts=breakdown_chart_info, pie_chart_info=pie_chart_info,
-                        films_by_week=films_by_week, films_by_weekday=films_by_weekday)
+                        films_by_week=films_by_week, films_by_weekday=films_by_weekday,
+                        map_data=map_data)
 
     except ValueError:
         return '<h1>404</h1>'

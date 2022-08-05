@@ -135,7 +135,73 @@ new Highcharts.chart((genreChart))
 new Highcharts.chart((countryChart))
 new Highcharts.chart((languageChart))
 
+// MAP
 
+var watchedCountries = {};
+
+$.each(allCountriesWatched, function(iso, country) {
+    if (country.count > 0) {
+        watchedCountries[iso] = country;
+    }
+});
+
+var svgMapData = {
+    data: {
+        count: {
+            name: 'Films watched:',
+            format: '{0}',
+            thousandSeparator: ','
+        }
+    },
+    applyData: 'count',
+    values: watchedCountries
+};
+
+var watchedMap = new svgMap({
+    targetElementID: 'film-world-map',
+    data: svgMapData,
+    colorMin: '#007733',
+    colorMax: '#00E054',
+    colorNoData: '#303C44',
+    hideFlag: true,
+    noDataText: 'No films'
+});
+
+var map = document.getElementById('film-world-map');
+var svg = map.querySelector('.svgMap-map-image');
+var countries = svg.querySelectorAll('.svgMap-country');
+
+function goToCountry(id, openInNewWindow = true) {
+    var data = allCountriesWatched[id];
+    if (data && data.url) {
+        if (typeof YEAR === 'undefined') {
+            var url = `https://letterboxd.com/${USERNAME}${data.url}`
+        } else {
+            var url = `https://letterboxd.com/${USERNAME}/films/diary/for/${YEAR}/country/${data.url.substring(14)}by/rating/`
+        }
+        if (openInNewWindow) {
+            var win = window.open(url , "_blank");
+        } else {
+            window.location = url;
+        }
+    }
+}
+
+for(var i = 0; i < countries.length; i++) {
+    const country = countries[i];
+
+    country.addEventListener('click', function(e) {
+        e.preventDefault();
+        goToCountry(country.getAttribute('data-id'));	
+    });
+}
+
+var tooltip = document.querySelector('.svgMap-tooltip');
+
+tooltip.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    goToCountry(this.getAttribute('data-id'), false);
+});
 
 // button event handlers
 

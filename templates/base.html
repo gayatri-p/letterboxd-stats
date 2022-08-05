@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,54 +11,69 @@
             font-family: TiemposTextWeb-Semibold;
             font-style: normal;
             font-weight: 400;
-            src: url({{ url_for('static', filename='/fonts/TiemposText-Semibold.otf') }});
+            src: url({{ url_for('static', filename='/fonts/TiemposText-Semibold.otf')}});
         }
 
         @font-face {
             font-family: Graphik-Regular-Web;
             font-style: normal;
             font-weight: 400;
-            src: url({{ url_for('static', filename='/fonts/GraphikRegular.otf') }});
+            src: url({{ url_for('static', filename='/fonts/GraphikRegular.otf')}});
         }
 
         @font-face {
             font-family: Graphik-Light-Web;
             font-style: normal;
             font-weight: 400;
-            src: url({{ url_for('static', filename='/fonts/GraphikLight.otf') }});
+            src: url({{ url_for('static', filename='/fonts/GraphikLight.otf')}});
         }
     </style>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <title>A Life in Film</title>
+
     {% block head %}{% endblock %}
 </head>
-<body class="year-in-review person-yir shortbackdropped -backdrop -crop logged-in hide-unwatched">
+
+<body class="year-in-review person-yir shortbackdropped -backdrop -crop logged-in hide-unwatched no-mobile">
+
+    <div id="content" class="site-body">
+        <div class="content-wrap">
+            <article id="js-member-statistics" class="yir">
+
+                
+                {% block body %}{% endblock %}
+
+                <!-- MAP -->
+                <section class="yir-block yir-world-map -alltime">
+                    <header>
+                        <a name="map"></a>
+                        <h3 class="yir-title-3">World map</h3>
+                    </header>
+                    <div id="film-world-map" class="stats-map -has-frame">
+                    </div>
+                </section>
+                
+            </article>
+        </div>
+    </div>
     
-    <div id="content" class="site-body">	
-    <div class="content-wrap">
-    <article id="js-member-statistics" class="yir">
-
-    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/highcharts.js') }}"></script>
-
-    {% block body %}{% endblock %}
-
-    </article>
-    </div>
-    </div>
     <script>
         var USERNAME = "{{USERNAME}}";
+        var allCountriesWatched = {{ map_data|tojson }};
     </script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     
-    {% if YEAR is defined %}
-        <script src="{{ url_for('static', filename='js/yearly.js') }}"></script>
-        
-    {% else %}
-        <script src="{{ url_for('static', filename='js/alltime.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/highcharts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/svgMap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+    {% if YEAR is defined %}
+    <script src="{{ url_for('static', filename='js/yearly.js') }}"></script>
+    {% else %}
+    <script src="{{ url_for('static', filename='js/alltime.js') }}"></script>
     {% endif %}
 
 </body>
+
 </html>

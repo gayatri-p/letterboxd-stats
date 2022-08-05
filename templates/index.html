@@ -80,15 +80,6 @@
             </div>
         </section>
         
-        <script>
-                
-            var bins = {{ films_by_year_chart.bins|safe }}
-            var count = {{ films_by_year_chart.count|safe }}
-            var ratings = {{ films_by_year_chart.ratings|safe }}
-
-        </script>
-
-        
         <section id="release-year-ratings" class="js-yir-tab-section yir-by-year yir-average-rating-by-release-year -hide">
             <div class="chart js-average-rating-by-release-year-chart">
                 <div class="target">
@@ -111,13 +102,6 @@
     </header>
     
     <div class="all-breakdown-charts"> 
-        <script>
-
-            var genre = [{{breakdown_charts.genre_keys | safe}}, {{breakdown_charts.genre_vals|safe}}]
-            var country = [{{breakdown_charts.country_keys | safe}}, {{breakdown_charts.country_vals|safe}}]
-            var language = [{{breakdown_charts.language_keys | safe}}, {{breakdown_charts.language_vals}}]
-            
-        </script>
 
         <section class="yir-genres">
             <div id="films-by-genre" class="yir-film-breakdown-graph">
@@ -183,8 +167,6 @@
         </nav>
     </header>
 
-    
-    
     <section id="actors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
         
         <ul class="avatar-list">
@@ -250,67 +232,64 @@
         </nav>
     </header>
     
-        <section id="directors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+    <section id="directors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+        <ul class="avatar-list">
             
-            <ul class="avatar-list">
-                
-                    {% for director, n_films in directors_most_watched.items() %}
-                    {% set url = director.replace(' ', '-').replace('.', '').lower() %}
+            {% for director, n_films in directors_most_watched.items() %}
+                {% set url = director.replace(' ', '-').replace('.', '').lower() %}
 
-                    <li>
-                        
-                        <a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
-                        <div class="yir-person-list-data">
-                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{director}}</a></p>
-                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{n_films}}&nbsp;films</a></p>
-                        </div>
-                    </li>
+                <li>
+                    
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{director}}</a></p>
+                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/with/director/{{url}}/">{{n_films}}&nbsp;films</a></p>
+                    </div>
+                </li>
 
-                    {% endfor %}
-                     
-            </ul>
-            
-        </section>
-        
-        
-            
-            <section id="directors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
-                
-                <ul class="avatar-list">
+            {% endfor %}
                     
-                    {% for director in directors_by_rating %}
-                    {% set url = director[0].replace(' ', '-').replace('.', '').lower() %}
-                        
-                        <li>
-                            
-                            <a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
-                            <div class="yir-person-list-data">
-                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
-                                <p class="yir-label –center -detail">★ {{director[1]}}</p>
-                            </div>
-                        </li>
-                    
-                    {% endfor %}
-                       
-                </ul>
+        </ul>
+    </section>
+
+    <section id="directors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
+        <ul class="avatar-list">
             
+        {% for director in directors_by_rating %}
+            {% set url = director[0].replace(' ', '-').replace('.', '').lower() %}
                 
-            </section>
+                <li>
+                    
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/ratings/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
+                        <p class="yir-label –center -detail">★ {{director[1]}}</p>
+                    </div>
+                </li>
             
-        
-    
+        {% endfor %}
+                
+        </ul>
+    </section>
 </section> 
 
 
-{#
-<section class="yir-block yir-world-map -alltime">
-    <header>
-        <a name="map"></a>
-        <h3 class="yir-title-3">World map</h3>
-    </header>
-    <div id="film-world-map" class="stats-map -has-frame">
-    </div>
-</section>#}
 
+
+
+
+
+
+<script>
+
+    var genre = [{{breakdown_charts.genre_keys | safe}}, {{breakdown_charts.genre_vals|safe}}]
+    var country = [{{breakdown_charts.country_keys | safe}}, {{breakdown_charts.country_vals|safe}}]
+    var language = [{{breakdown_charts.language_keys | safe}}, {{breakdown_charts.language_vals}}]
+    
+    var bins = {{ films_by_year_chart.bins|safe }}
+    var count = {{ films_by_year_chart.count|safe }}
+    var ratings = {{ films_by_year_chart.ratings|safe }}
+    
+</script>
 
 {% endblock body %}

@@ -41,10 +41,10 @@ var pieReleaseDates = {
         data: [{
             name: 'current_year',
             y: releases_this_year,
-            color: '#445566'
+            color: '#00e054'
         }, {
             name: 'older',
-            color: '#00e054',
+            color: '#445566',
             y: older_releases
         }]
     }]

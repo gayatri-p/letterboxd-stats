@@ -1,4 +1,3 @@
-  
 # Screenshots
 
 ### Alltime stats page

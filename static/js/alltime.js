@@ -28,9 +28,18 @@ var filmsByYearChart = {
         column: {
             pointPadding: 0,
             borderWidth: 0,
+            borderRadius: 3,
             groupPadding: 0,
             shadow: false,
-            pointWidth: 10
+            pointWidth: 10,
+            point: {
+                events: {
+                    click: function () {
+                        window.open(
+                            `https://letterboxd.com/${USERNAME}/films/year/${this.category}`);
+                    }
+                }
+            }
         }
     },
 
@@ -68,8 +77,6 @@ averageRatingByReleaseYear = jQuery.extend(true, {}, filmsByYearChart, {
 
 new Highcharts.chart((filmsByReleaseYear))
 new Highcharts.chart((averageRatingByReleaseYear))
-
-
 
 // button event handlers
 

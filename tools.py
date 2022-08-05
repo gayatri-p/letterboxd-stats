@@ -1,5 +1,6 @@
 from statistics import mean
 import csv
+import json
 
 def get_username():
     with open('export/profile.csv', encoding='utf-8') as f:
@@ -75,3 +76,19 @@ def breakdown_charts(genres, countries, languages):
         'language_keys': list(top_languages.keys()),
         'language_vals': list(top_languages.values()),
     }
+
+def map_data(countries):
+    with open('static/mapping.json') as f:
+        country_mapping=json.load(f)
+    
+    data = {}
+    
+    for country, details in country_mapping.items():
+        print(country)
+        data[details['code']] = {
+            'count': countries.get(country, 0),
+            'label': country,
+            'url': details['url']
+        }
+
+    return data

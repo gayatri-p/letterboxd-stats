@@ -4,10 +4,6 @@
 
 {% block body %}
 
-<script>
-    var YEAR = {{YEAR|safe}}
-</script>
-
 <header class="yir-member-header -all-time">
     <div class="constraint">
         
@@ -128,13 +124,6 @@
         <h3 class="yir-title-3">Films by week</h3>
     </header>
 
-    <script>
-
-        var filmsByWeek = {{ films_by_week|safe }}
-        var filmsByWeekDay = {{ films_by_weekday|safe }}
-
-    </script>
-
     <div style="height: 160px;margin-bottom: 95px;margin-top:-30px">
         <div class="chart js-viewings-per-week-of-year-chart">
             <div class="target js-target" data-highcharts-chart="6">
@@ -152,19 +141,18 @@
 <section class="yir-block yir-time-data text">
     <section class="yir-numbers">
         <ul>
-            {% set d = details['diary_entries'] %}
             <li>
-                <strong>{{ d }}</strong> 
+                <strong>{{ details.diary_entries }}</strong> 
                 <span class="yir-label –center -detail">Films watched</span>
                 <i class="ir s"></i>
             </li>
             <li>
-                <strong>{{ (d/12)|round(1) }}</strong> 
+                <strong>{{ details.time_data.per_month }}</strong> 
                 <span class="yir-label –center -detail">Average per month</span>
                 <i class="ir s"></i>
             </li>
             <li>
-                <strong>{{ (d/52)|round(1) }}</strong> 
+                <strong>{{ details.time_data.per_week }}</strong> 
                 <span class="yir-label –center -detail">Average per week</span>
             </li>
         </ul>
@@ -193,19 +181,19 @@
             
             <h3 class="yir-label yir-title-label">First Film</h3>
 
-            {% set first = milestones[0] %}
-            {% set url = first['name'].replace(' ', '-').replace('.', '').lower() %}
+            {% set first = milestones[0][0] %}
+                {% set url = first['name'].replace(' ', '-').replace('.', '').lower() %}
 
-            <div class="poster-container">
-                <div class="poster film-poster linked-film-poster">
-                    <div>
-                        <img src="{{first['poster']}}" width="110" height="165" alt="{{ first['name'] }}" class="image">
-                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
+                <div class="poster-container">
+                    <div class="poster film-poster linked-film-poster">
+                        <div>
+                            <img src="{{first['poster']}}" width="110" height="165" alt="{{ first['name'] }}" class="image">
+                            <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <p class="yir-label -detail">Jan 1</p>
+                <p class="yir-label -detail">{{ milestones[0][1] }}</p>
 
         </div>
         
@@ -237,25 +225,26 @@
                 {% endfor %}
                     
             </div>
-        </div>
-        
+        </div>    
 
         <div class="film-block -last">	
             <h3 class="yir-label yir-title-label">Last Film</h3>
 
-            {% set last = milestones[1] %}
-            {% set url = last['name'].replace(' ', '-').replace('.', '').lower() %}
+            {% set last = milestones[1][0] %}
+               {% set url = last['name'].replace(' ', '-').replace('.', '').lower() %}
 
-            <div class="poster-container">
-                <div class="poster film-poster linked-film-poster">
-                    <div>
-                        <img src="{{ last['poster'] }}" width="110" height="165" alt="{{ last['name'] }}" class="image">
-                        <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
+                <div class="poster-container">
+                    <div class="poster film-poster linked-film-poster">
+                        <div>
+                            <img src="{{ last['poster'] }}" width="110" height="165" alt="{{ last['name'] }}" class="image">
+                            <a href="https://letterboxd.com/{{USERNAME}}/film/{{ url }}/activity/" class="frame"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <p class="yir-label -detail">Dec 31</p>
+
+                <p class="yir-label -detail">{{ milestones[1][1] }}</p>
         </div>
+
     </div>
     <div class="clear"></div>
 </section>
@@ -268,36 +257,20 @@
     </header>
     
     <div class="all-breakdown-charts"> 
-        <script>
-
-            var genre = [{{breakdown_charts.genre_keys | safe}}, {{breakdown_charts.genre_vals|safe}}]
-            var country = [{{breakdown_charts.country_keys | safe}}, {{breakdown_charts.country_vals|safe}}]
-            var language = [{{breakdown_charts.language_keys | safe}}, {{breakdown_charts.language_vals}}]
-           
-
-        </script>
-
+        
 
         <section class="yir-genres">
-            <div id="films-by-genre" class="yir-film-breakdown-graph">
-                
-            </div>
+            <div id="films-by-genre" class="yir-film-breakdown-graph"></div>
         </section>
         
         <section class="yir-countries">
-            <div id="films-by-country" class="yir-film-breakdown-graph">
-                
-            </div>
+            <div id="films-by-country" class="yir-film-breakdown-graph"></div>
         </section>
         
         <section class="yir-languages">
-            <div id="films-by-language" class="yir-film-breakdown-graph">
-                
-            </div>
+            <div id="films-by-language" class="yir-film-breakdown-graph"></div>
         </section>
     </div> 
-    
- 
 </section>
 
 <!-- PIE CHARTS -->
@@ -307,16 +280,7 @@
         <h3 class="yir-title-3">Breakdown</h3>
     </header>
     <section class="yir-pies yir-personal-pies">
-        <script>
-
-            var diary_entries = {{ details['diary_entries']|safe }}
-            var older_releases = {{ pie_chart_info['older_releases']|safe }}
-            var releases_this_year = diary_entries - older_releases
-            var rewatches = {{ pie_chart_info['rewatches']|safe }}
-            var new_watches = diary_entries - rewatches
-
-
-        </script>
+        
         <div class="pie-chart pie-release-dates">
             <h3 class="yir-label"><span class="pie-key pie-key-val1">2021 Releases</span> <span class="pie-key pie-key-val2">Older</span></h3>
             <div id="pie-release-dates" class="pie-highchart"></div>
@@ -340,8 +304,6 @@
         </nav>
     </header>
 
-    
-    
     <section id="actors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
         
         <ul class="avatar-list">
@@ -359,11 +321,9 @@
                     </div>
                 </li>
             
-            {% endfor %}        
-                
-               
+            {% endfor %}
+
         </ul>
-        
     </section>
     
     <section id="actors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
@@ -372,6 +332,7 @@
                 
         {% for actor in actors_by_rating %}
             {% set url = actor[0].replace(' ', '-').replace('.', '').lower() %}
+            
                 <li>
                     
                     <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/actor/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded">
@@ -382,16 +343,11 @@
                         <p class="yir-label –center -detail">★ {{actor[1]}}</p>
                     </div>
                 </li>
+
         {% endfor %}   
-                
-            
-            </ul>
-        
+
+        </ul>
     </section>
-
-
-                
-    
 </section>
 
 <!-- FAV DIRECTORS -->
@@ -400,66 +356,71 @@
         <a name="directors"></a>
         <h3 class="yir-title-3">Directors</h3>
         <nav>
-            
-            <a class="js-yir-internal-nav-link -active" id="btn-directors-most-watched">Most watched</a>
-                
+            <a class="js-yir-internal-nav-link -active" id="btn-directors-most-watched">Most watched</a>            
             <a class="js-yir-internal-nav-link" id="btn-directors-by-rating">Highest Rated</a>
         </nav>
     </header>
     
-        <section id="directors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+    <section id="directors-most-watched" class="js-yir-tab-section yir-fave-person yir-person-list-multi -show">
+        
+        <ul class="avatar-list">
             
-            <ul class="avatar-list">
-                
-                    {% for director, n_films in directors_most_watched.items() %}
-                    {% set url = director.replace(' ', '-').replace('.', '').lower() %}
+            {% for director, n_films in directors_most_watched.items() %}
+                {% set url = director.replace(' ', '-').replace('.', '').lower() %}
 
-                    <li>
-                        
-                        <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
-                        <div class="yir-person-list-data">
-                            <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}//">{{director}}</a></p>
-                            <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/">{{n_films}}&nbsp;films</a></p>
-                        </div>
-                    </li>
+                <li>
+                    
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a class="-allow-widow" href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}//">{{director}}</a></p>
+                        <p class="yir-label –center -detail"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{ url }}/">{{n_films}}&nbsp;films</a></p>
+                    </div>
+                </li>
 
-                    {% endfor %}
-                     
-            </ul>
-            
-        </section>
-        
-        
-            
-            <section id="directors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
-                
-                <ul class="avatar-list">
+            {% endfor %}
                     
-                    {% for director in directors_by_rating %}
-                    {% set url = director[0].replace(' ', '-').replace('.', '').lower() %}
-                        
-                        <li>
-                            
-                            <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
-                            <div class="yir-person-list-data">
-                                <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
-                                <p class="yir-label –center -detail">★ {{director[1]}}</p>
-                            </div>
-                        </li>
-                    
-                    {% endfor %}
-                       
-                </ul>
-            
-                
-            </section>
-            
+        </ul>    
+    </section>
+
+    <section id="directors-by-rating" class="js-yir-tab-section yir-fave-person yir-person-list-multi -hide">
         
+        <ul class="avatar-list">
+            
+        {% for director in directors_by_rating %}
+            {% set url = director[0].replace(' ', '-').replace('.', '').lower() %}
+                
+                <li>
+                    
+                    <a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/" class="avatar -a150 -irregular image-loaded" data-original-title=""><img src="{{ url_for('static', filename='img/person.png') }}" class="js-tmdb-person crop-square"></a>
+                    <div class="yir-person-list-data">
+                        <p class="yir-secondary-heading"><a href="https://letterboxd.com/{{USERNAME}}/films/diary/for/{{YEAR}}/with/director/{{url}}/by/entry-rating/">{{director[0]}}</a></p>
+                        <p class="yir-label –center -detail">★ {{director[1]}}</p>
+                    </div>
+                </li>
+            
+        {% endfor %}
+                
+        </ul>  
+    </section>
     
 </section> 
 
+<script>
+    var YEAR = {{YEAR|safe}}
 
+    var genre = [{{breakdown_charts.genre_keys | safe}}, {{breakdown_charts.genre_vals|safe}}]
+    var country = [{{breakdown_charts.country_keys | safe}}, {{breakdown_charts.country_vals|safe}}]
+    var language = [{{breakdown_charts.language_keys | safe}}, {{breakdown_charts.language_vals}}]
+    
 
+    var filmsByWeek = {{ films_by_week|safe }}
+    var filmsByWeekDay = {{ films_by_weekday|safe }}
 
+    var diary_entries = {{ details.diary_entries }}
+    var older_releases = {{ pie_chart_info.older_releases|safe }}
+    var releases_this_year = diary_entries - older_releases
+    var rewatches = {{ pie_chart_info.rewatches|safe }}
+    var new_watches = diary_entries - rewatches
+</script>
 
 {% endblock body %}

@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for
 import csv
 from statistics import mean
 from random import randint
 import datetime
-
+# import json
 import tools
 
 USERNAME = tools.get_username()
@@ -71,6 +71,22 @@ def films_by_year_chart():
 
     return chart_info
 
+# def map_data(countries):
+#     with open('static/mapping.json') as f:
+#         country_mapping=json.load(f)
+    
+#     data = {}
+    
+#     for country, details in country_mapping.items():
+#         print(country)
+#         data[details['code']] = {
+#             'count': countries.get(country, 0),
+#             'label': country,
+#             'url': details['url']
+#         }
+
+#     return data
+
 breakdown_chart_info = tools.breakdown_charts(genres, countries, languages)
 
 lifetime_stats = {
@@ -97,4 +113,4 @@ def index():
                             films_most_watched=films_most_watched,
                             films_by_year_chart=films_by_year_chart(),
                             breakdown_charts=breakdown_chart_info,
-                            countries=countries)
+                            countries=countries, map_data=tools.map_data(countries))
