@@ -1,9 +1,5 @@
-export/lists
-export/deleted
-export/profile.csv
-export/comments.csv
-export/reviews.csv
-export/watchlist.csv
+export*/
+lboxd/
 example_files/
 __pycache__
 example.html
@@ -12,3 +8,4 @@ main.log
 test*
 2021*
 bin/
+secrets.txt
